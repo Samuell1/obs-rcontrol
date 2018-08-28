@@ -29,7 +29,7 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "yarn"
+        "packageManager": "npm"
       },
       "electronWinstallerConfig": {
         "name": "obs_rcontrol"
@@ -46,10 +46,18 @@
       }
     }
   },
+  "iohook": {
+    "targets": [
+      "node-59",
+      "electron-57"
+    ]
+  },
   "dependencies": {
     "electron-compile": "^6.4.3",
     "electron-devtools-installer": "^2.1.0",
     "electron-squirrel-startup": "^1.0.0",
+    "iohook": "^0.2.0",
+    "lodash.debounce": "^4.0.8",
     "obs-websocket-js": "^1.2.0",
     "vue": "^2.1.7",
     "vueify": "^9.4.1"

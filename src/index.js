@@ -11,11 +11,10 @@ if (isDevMode) enableLiveReload();
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 600,
-    height: 500,
+    height: 600,
+    titleBarStyle: 'hidden'
   });
 
-  //mainWindow.setMenu(null);
-  mainWindow.setResizable(false);
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   if (isDevMode) {
