@@ -14,38 +14,7 @@
   "keywords": [],
   "author": "Samuell",
   "license": "MIT",
-  "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "npm"
-      },
-      "electronWinstallerConfig": {
-        "name": "obs_rcontrol"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "Samuell1",
-        "name": "obs-rcontrol"
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "obsrcontrol"
-      }
-    }
-  },
+  "config": { "forge": "./forge.config.js" },
   "iohook": {
     "targets": [
       "node-59",
