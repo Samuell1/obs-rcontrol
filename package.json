@@ -1,8 +1,8 @@
 {
   "name": "obs-rcontrol",
-  "productName": "obs-rcontrol",
+  "productName": "OBS Remote Control",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Switch scene in OBS by keybind and remotely",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -12,7 +12,7 @@
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "Samuel",
+  "author": "Samuell",
   "license": "MIT",
   "config": {
     "forge": {
@@ -59,7 +59,7 @@
     "iohook": "^0.2.0",
     "lodash.debounce": "^4.0.8",
     "obs-websocket-js": "^1.2.0",
-    "vue": "^2.1.7",
+    "vue": "^2.5.17",
     "vueify": "^9.4.1"
   },
   "devDependencies": {
