@@ -39,8 +39,8 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "Samuell1",
+        "name": "obs-rcontrol"
       },
       "windowsStoreConfig": {
         "packageName": "",
