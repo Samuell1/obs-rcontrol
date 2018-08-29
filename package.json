@@ -29,10 +29,12 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "npm"
+        "packageManager": "npm",
+        "icon": "assets/icon.png"
       },
       "electronWinstallerConfig": {
-        "name": "obs_rcontrol"
+        "name": "obs_rcontrol",
+        "setupIcon": "assets/icon.png"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
