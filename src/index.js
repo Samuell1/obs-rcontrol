@@ -13,7 +13,10 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 600,
     height: 600,
-    icon: path.join(__dirname + '/assets/icon.png')
+    icon: path.join(__dirname + '/assets/icon.png'),
+    webPreferences: {
+      backgroundThrottling: false // allow app to be minimized without affecting keybind delays
+    },
   });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
