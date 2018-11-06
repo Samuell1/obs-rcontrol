@@ -1,14 +1,13 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, powerSaveBlocker } from 'electron';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
 import path from 'path';
 
 const squirrel = require('./squirrel');
-
-
 let mainWindow;
-
 const isDevMode = process.execPath.match(/[\\/]electron/);
+
+powerSaveBlocker.start('prevent-app-suspension');
 
 if (isDevMode) enableLiveReload();
 
