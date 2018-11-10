@@ -15,7 +15,7 @@
           </button>
         </div>
       </div>
-      <div class="flex -mx-3 mb-6">
+      <div class="flex -mx-3">
         <div class="w-full px-3 mb-6">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="Address">
             Address
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="w-full pt-4 border-t border-grey-light" v-if="status">
-      <div class="flex -mx-3 mb-6">
+      <div class="flex -mx-3">
         <div class="w-full px-3 mb-6">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="Scene">Active Scene</label>
           <div class="relative">
@@ -53,6 +53,21 @@
               <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="flex -mx-3 mb-6">
+        <div class="w-full px-3 mb-6">
+          <div class="md:w-1/3"></div>
+          <label class="md:w-2/3 block text-grey font-bold">
+            <input class="mr-2 leading-tight" type="checkbox" v-model="isSameScenes">
+            <span class="text-sm">
+              Activate overlay only when active scene is same as selected scene in OBS
+            </span>
+          </label>
+        </div>
+        <div class="w-full px-3 mb-6">
+          <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="Timeout">Delay after keybind is released</label>
+          <input class="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded block w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-indigo" id="Timeout" type="text" v-model="timeout">
         </div>
       </div>
       <div class="mb-6">
@@ -91,17 +106,21 @@ export default {
   data () {
     return {
       obs: null,
+      obsActiveScene: '',
       activeScene: '',
       overlayScene: '',
       sceneList: [],
-      keycodes: keycodes,
 
+      keycodes: keycodes,
       keycode: 34,
 
       login: {
         address: 'localhost:4444',
         password: ''
       },
+
+      timeout: 1000,
+      isSameScenes: false,
 
       keybindStatus: 0,
       status: 0,
@@ -129,15 +148,23 @@ export default {
     },
     detectKeybindState: debounce(async function({ keycode, type }) {
       let scene
+      let timeout = 0
+      if (this.isSameScenes) {
+        const getCurrentScene = await this.obs.getCurrentScene()
+        if (getCurrentScene.name !== this.activeScene && getCurrentScene.name !== this.overlayScene) return
+      }
       if (keycode == this.keycode) {
         if (type == 'keydown') {
           scene = this.overlayScene
         } else if (type == 'keyup') {
           scene = this.activeScene
+          timeout = this.timeout
         }
-        this.history.unshift(`Action ${type} - ${keycode}, Scene: ${scene}`)
+        this.history.unshift(`Action ${type} - ${this.keycodes[keycode]}, Scene: ${scene}`)
         try {
-          await this.obs.setCurrentScene({ 'scene-name': scene })
+          await setTimeout(async () => {
+            await this.obs.setCurrentScene({ 'scene-name': scene })
+          }, timeout)
         } catch ({ error }) {
           this.history.unshift(`Error: ${error}`)
         }

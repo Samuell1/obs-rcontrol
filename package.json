@@ -1,7 +1,7 @@
 {
   "name": "obs-rcontrol",
   "productName": "OBS Remote Control",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Switch scene in OBS by keybind and remotely",
   "main": "src/index.js",
   "scripts": {
